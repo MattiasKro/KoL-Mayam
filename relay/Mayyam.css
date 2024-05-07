@@ -26,6 +26,7 @@
 
 .disabled {
     pointer-events: none;
+    border: 2px solid darkgray;
     color: #ccc;
 }
 

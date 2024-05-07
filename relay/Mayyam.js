@@ -12,13 +12,23 @@ function searchImageByTitleWithinDiv(divId, title) {
     return image; // Return the image element (or null if not found)
 }
 
-function handleYam(source) {
+function handleYam(event) {
+    event.stopPropagation();
+    const source = event.target || event.srcElement;
+    rotateWheel(source);
+}
+
+function rotateWheel(source) {
     if (source.dataset.yamdata != null) {
-//        console.log("Click! " + source.dataset.yamdata);
+        console.log("Click! " + source.dataset.yamdata);
         const items = source.dataset.yamdata.split(",").map(item => item.trim());
         for (i=0;i<4;i++) {
             searchImageByTitleWithinDiv("x" + (4-i), items[i]).click();
         }
+    } else {
+        if (source.parentNode != null) {
+            rotateWheel(source.parentNode);
+        }
+        return false;
     }
 }
-
