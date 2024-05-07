@@ -1,9 +1,9 @@
 # KoL-Mayam
-Helper to remember the combiantions for the differens resonance results on the Mayam calendar (IotM May 2024)
+Helper to remember the combinations for the different resonance results for the Mayam calendar (IotM May 2024)
 
 ## Installation:
 
-Run the following int the Graphical CLI in KolMafia
+Run the following in the Graphical CLI in KolMafia
 
 ```git checkout MattiasKro/KoL-Mayam```
 
