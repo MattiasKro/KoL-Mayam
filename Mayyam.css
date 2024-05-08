@@ -1,0 +1,75 @@
+
+.section-title {
+    font-weight: bold;
+    background-color: rgb(217, 161, 101);
+    color: white;
+    margin: 0px;
+}
+
+.section {
+    border: 1px solid rgb(217, 161, 101);
+    margin: 5px;
+}
+
+.yam-button {
+    display: inline-flex;
+    text-align: center;
+    justify-content: center;
+    border: 2px solid black;
+    padding: 5px 15px;
+    cursor: pointer;
+    max-width: 250px;
+    height: 54px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin: 5px;
+}
+
+.disabled {
+    pointer-events: none;
+    border: 2px solid darkgray;
+    color: #ccc;
+}
+
+.yam-button img {
+    margin: 0;
+    vertical-align: middle; 
+    -ms-transform: translateY(30%);
+    transform: translateY(30%);
+    pointer-events: auto;
+}
+
+.yam-text {
+    pointer-events: auto;
+    align-self: center;
+    font-size: 12px;
+    width: 200px;
+}
+
+.reftable {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.reftable td {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    border: 1px solid rgb(217, 161, 101);
+}
+
+.reftable .result {
+    text-align: left;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+ .reftable .header td {
+    background-color: rgb(217, 161, 101);
+    color: white;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+ }
