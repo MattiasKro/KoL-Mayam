@@ -13,7 +13,6 @@ Relay script for KoLmafia, for the web game Kingdom of Loathing.
 
 Shows the different resonance results, and automatically select the correct calendar items to get it.
 
-Note that you currently cannot click on the images to select a result.
-
 ## Example:
-![bild](https://github.com/MattiasKro/KoL-Mayam/assets/39094075/2e3e5e52-a717-432c-930a-005d9d576364)
+![bild](https://github.com/MattiasKro/KoL-Mayam/assets/39094075/0fb669e5-bea1-4cc5-8f18-686e3da05cff)
+
