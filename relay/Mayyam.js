@@ -5,8 +5,8 @@ function searchImageByTitleWithinDiv(divId, title) {
     
     // Check if the div is found
     if (div) {
-        // Find the image element with the specified title within the div
-        var image = div.querySelector('img[title="' + title + '"]');        
+        // Find the image element with the specified alt text  within the div
+        var image = div.querySelector('img[alt="' + title + '"]');        
     }
     
     return image; // Return the image element (or null if not found)
@@ -20,7 +20,7 @@ function handleYam(event) {
 
 function rotateWheel(source) {
     if (source.dataset.yamdata != null) {
-        console.log("Click! " + source.dataset.yamdata);
+//        console.log("Click! " + source.dataset.yamdata);
         const items = source.dataset.yamdata.split(",").map(item => item.trim());
         for (i=0;i<4;i++) {
             searchImageByTitleWithinDiv("x" + (4-i), items[i]).click();

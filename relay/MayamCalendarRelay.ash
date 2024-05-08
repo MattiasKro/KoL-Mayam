@@ -55,6 +55,58 @@ boolean [string, string] parseAvailableSummons(string source) {
     return availability;
 }
 
+string fixAltTexts(string pageSource) {
+    buffer fixedText = pageSource;
+
+    string [string] conversionTable = {
+        "Yam": "1F food, 4-5  adv",
+        "Sword": "10 x lvl STR substats",
+        "Vessel": "100 turns of Vessel of Magic (max MP +100, 2-12 MP regen) + 1000 MP",
+        "Fur": "100 famxp",
+        "Chair": "+5 free rests",
+        "Eye": "100 turns of Big Eyes (+30% item drop)",
+        "Lightning": "10 x lvl MYS substats",
+        "Bottle": "100 turns of Bottled Fortune (max HP +100, 15-20 HP regen)",
+        "Wood": "4 planks/fasteners",
+        "Meat": "100 x lvl meat ",
+        "Eyepatch": "10 x lvl MOX substats",
+        "Cheese": "Goat Cheese",
+        "Wall": "100 turns of Walled In (+10 DR, +2 prismatic res)",
+        "Clock": "+5 adventurs",
+        "Explosion": "+5 fites",
+    };
+
+    foreach key, sub in conversionTable {
+        fixedText.replace_string('title="' + key + '"', 'title="' + key + ': ' + sub + '"');
+    }
+
+    return fixedText;
+}
+
+string createRererenceTable(string [int, int] btnData, boolean [string, string] availability) {
+    buffer table;
+
+    table.append('<div class="section" style="width:95%"><div class="section-title"">Resonance Reference</div><div>');
+    table.append('<table class="reftable"><tr class="reftable header"><td>Result</td><td>Ring 1</td><td>Ring 2</td><td>Ring 3</td><td>Ring 4</td></tr>');
+    table.append('</div></div>');
+    
+    foreach key in btnData {
+        table.append('<tr><td class="reftable result">');
+        table.append('<img src="/images/itemimages/' + btnData[key][2] + '" height="20" width="20">');
+        table.append(' ' + btnData[key][0] + '</td>');
+
+        string [int] items = split_string(btnData[key][3], ", "); // This will store items in an array, but the index wil not match ring #
+        foreach key, itemName in items {
+          table.append('<td>' + itemName + '</td>');
+        }
+        table.append('</tr>');
+    }
+    
+    table.append('</table>');
+
+    return table;
+}
+
 string handleYamConsideration(string page_text) {
     string [int, int] buttonData = {
         {"Mayam spinach", "1 fullness food, 4 adv<br>50 turns of Weapon Damage +30", "spinachcan.gif", "Eye, Yam, Eyepatch, Yam"},
@@ -75,7 +127,8 @@ string handleYamConsideration(string page_text) {
     buffer newPage;
     buffer rewardButtons;
     
-    newPage.append(page_text);
+    newPage.append(fixAltTexts(page_text));
+
     newPage.replace_string("</head>", "<script type=\"text/javascript\" src=\"Mayyam.js\"></script></head>");
     newPage.replace_string("</head>", '<link rel="stylesheet" type="text/css" href="Mayyam.css\"></head>');
     newPage.replace_string("<i>(Click a symbol to rotate the calendar.)</i>", ""); 
@@ -88,8 +141,11 @@ string handleYamConsideration(string page_text) {
 
     rewardButtons.append("<script>\n");
     rewardButtons.append('const buttons = document.querySelectorAll(".yam-button");\n');
-    rewardButtons.append('buttons.forEach(button => { button.addEventListener("click", handleYam, false); });\n');
+    rewardButtons.append('buttons.forEach(button => { button.addEventListener("click", handleYam, true); });\n');
     rewardButtons.append("</script>\n");
+
+// Excluded for now, didn't give enough benefit and looks ugly.
+//    rewardButtons.append(createRererenceTable(buttonData, availability));
 
     int startPos = newPage.last_index_of("</table>");
     int endPos = newPage.last_index_of("</table>") + length("</table>");
