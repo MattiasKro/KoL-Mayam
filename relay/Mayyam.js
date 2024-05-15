@@ -19,11 +19,12 @@ function handleYam(event) {
 }
 
 function rotateWheel(source) {
+    const rings = [" (outer ring)", " (middle-outer ring)", " (middle-inner ring)", " (inner ring)"];
     if (source.dataset.yamdata != null) {
 //        console.log("Click! " + source.dataset.yamdata);
         const items = source.dataset.yamdata.split(",").map(item => item.trim());
         for (i=0;i<4;i++) {
-            searchImageByTitleWithinDiv("x" + (4-i), items[i]).click();
+            searchImageByTitleWithinDiv("x" + (4-i), items[i] + rings[i]).click();
         }
     } else {
         if (source.parentNode != null) {

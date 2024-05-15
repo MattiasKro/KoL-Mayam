@@ -41,9 +41,10 @@ boolean [string, string] parseAvailableSummons(string source) {
         matcher divmatcher = create_matcher("(<div id=\"" + divName + "\".*?</div>)", source);
         if (find(divmatcher)) {
             string subset = group(divmatcher, 1);
-            matcher imgmatcher = create_matcher("<img .*? class=\"(.*?)\" .*? title=\"(.*?)\".*?>", subset);
+            matcher imgmatcher = create_matcher("<img .*? class=\"(.*?)\".*? title=\"(.*?) .*?>", subset);
             while (find(imgmatcher)) {
                 string part = group(imgmatcher, 2);
+                print(part);
                 if (length(group(imgmatcher ,1)) > 0) {
                     availability[divname, part] = false;
                 } else {
@@ -59,21 +60,24 @@ string fixAltTexts(string pageSource) {
     buffer fixedText = pageSource;
 
     string [string] conversionTable = {
-        "Yam": "1F food, 4-5  adv",
-        "Sword": "10 x lvl STR substats",
-        "Vessel": "100 turns of Vessel of Magic (max MP +100, 2-12 MP regen) + 1000 MP",
-        "Fur": "100 famxp",
-        "Chair": "+5 free rests",
-        "Eye": "100 turns of Big Eyes (+30% item drop)",
-        "Lightning": "10 x lvl MYS substats",
-        "Bottle": "100 turns of Bottled Fortune (max HP +100, 15-20 HP regen)",
-        "Wood": "4 planks/fasteners",
-        "Meat": "100 x lvl meat ",
-        "Eyepatch": "10 x lvl MOX substats",
-        "Cheese": "Goat Cheese",
-        "Wall": "100 turns of Walled In (+10 DR, +2 prismatic res)",
-        "Clock": "+5 adventurs",
-        "Explosion": "+5 fites",
+        "Yam (outer ring)": "1F food, 4-5  adv",
+        "Sword (outer ring)": "10 x lvl STR substats",
+        "Vessel (outer ring)": "100 turns of Vessel of Magic (max MP +100, 2-12 MP regen) + 1000 MP",
+        "Fur (outer ring)": "100 famxp",
+        "Chair (outer ring)": "+5 free rests",
+        "Eye (outer ring)": "100 turns of Big Eyes (+30% item drop)",
+        "Yam (middle-outer ring)": "1F food, 4-5  adv",
+        "Lightning (middle-outer ring)": "10 x lvl MYS substats",
+        "Bottle (middle-outer ring)": "100 turns of Bottled Fortune (max HP +100, 15-20 HP regen)",
+        "Wood (middle-outer ring)": "4 planks/fasteners",
+        "Meat (middle-outer ring)": "100 x lvl meat ",
+        "Yam (middle-inner ring)": "1F food, 4-5  adv",
+        "Eyepatch (middle-inner ring)": "10 x lvl MOX substats",
+        "Cheese (middle-inner ring)": "Goat Cheese",
+        "Wall (middle-inner ring)": "100 turns of Walled In (+10 DR, +2 prismatic res)",
+        "Yam (inner ring)": "1F food, 4-5  adv",
+        "Clock (inner ring)": "+5 adventurs",
+        "Explosion (inner ring)": "+5 fites",
     };
 
     foreach key, sub in conversionTable {
