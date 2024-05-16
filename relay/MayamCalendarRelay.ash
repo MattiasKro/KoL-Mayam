@@ -44,7 +44,6 @@ boolean [string, string] parseAvailableSummons(string source) {
             matcher imgmatcher = create_matcher("<img .*? class=\"(.*?)\".*? title=\"(.*?) .*?>", subset);
             while (find(imgmatcher)) {
                 string part = group(imgmatcher, 2);
-                print(part);
                 if (length(group(imgmatcher ,1)) > 0) {
                     availability[divname, part] = false;
                 } else {
